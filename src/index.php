@@ -4,6 +4,7 @@ ini_set('error_reporting', E_ALL);
 
 require(__DIR__."/Config.php");
 require(__DIR__."/Module/AccountManager.php");
+require(__DIR__."/Module/GetPage.php");
 
 require("https://cdn.rumia.me/LIB/SQL.php?V=LATEST");
 require("https://cdn.rumia.me/LIB/RMD.php?V=LATEST");
@@ -50,6 +51,7 @@ if (isset($_COOKIE["SESSION"])) {
 		<LINK REL="stylesheet" HREF="https://cdn.rumia.me/CSS/font.css">
 
 		<LINK REL="stylesheet" HREF="/STYLE/Main.css">
+		<LINK REL="stylesheet" HREF="/STYLE/Editor.css">
 	</HEAD>
 	<BODY>
 		<DIV CLASS="HEADER">
@@ -81,7 +83,7 @@ if (isset($_COOKIE["SESSION"])) {
 					} elseif ($REQUEST_PATH == "/create_done") {
 						require(__DIR__."/Page/Create/Done.php");
 					} elseif (str_starts_with($REQUEST_PATH, "/edit/")) {
-						require(__DIR__."/Page/Edit/editor.php");
+						require(__DIR__."/Page/Edit/edit.php");
 					}
 				} else {
 					//ログインしてない場合用

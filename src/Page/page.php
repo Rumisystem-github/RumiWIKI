@@ -1,37 +1,14 @@
 <?php
 $TITLE = urldecode(str_replace("/page/", "", $REQUEST_PATH));
 
-$SQL_RESULT = SQL_RUN($PDO, 
-	<<<TEXT
-		SELECT
-			`D`.`PAGE` AS `ID`,
-			`D`.`TITLE`,
-			`D`.`DATE`,
-			`D`.`TITLE`,
-			`D`.`TEXT`,
-			`I`.`LOCK`
-		FROM
-			`PAGE_DATA` AS `D`
-		JOIN
-			`PAGE_INFO` AS `I` ON `I`.`ID` = `D`.`PAGE`
-		WHERE
-			`D`.`TITLE` = :TITLE
-		LIMIT 1;
-	TEXT,
-	array(
-		array(
-			"KEY" => "TITLE",
-			"VAL" => $TITLE
-		)
-	)
-);
+$PAGE = GetPageFromTitle($TITLE);
 
-if ($SQL_RESULT["STATUS"] && count($SQL_RESULT["RESULT"]) == 1) {
-	$PAGE_ID = $SQL_RESULT["RESULT"][0]["ID"];
-	$PAGE_TITLE = $SQL_RESULT["RESULT"][0]["TITLE"];
-	$PAGE_TEXT = $SQL_RESULT["RESULT"][0]["TEXT"];
-	$PAGE_DATE = new DateTime($SQL_RESULT["RESULT"][0]["DATE"]);
-	if ($SQL_RESULT["RESULT"][0]["LOCK"] == 1) {
+if ($PAGE != null) {
+	$PAGE_ID = $PAGE["ID"];
+	$PAGE_TITLE = $PAGE["TITLE"];
+	$PAGE_TEXT = $PAGE["TEXT"];
+	$PAGE_DATE = new DateTime($PAGE["DATE"]);
+	if ($PAGE["LOCK"] == 1) {
 		$PAGE_LOCK = true;
 	} else {
 		$PAGE_LOCK = false;
