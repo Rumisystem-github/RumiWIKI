@@ -1,0 +1,83 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('error_reporting', E_ALL);
+
+require(__DIR__."/Config.php");
+require(__DIR__."/Module/AccountManager.php");
+
+require("https://cdn.rumia.me/LIB/SQL.php?V=LATEST");
+require("https://cdn.rumia.me/LIB/RMD.php?V=LATEST");
+require("http://cdn.rumia.me/LIB/OGP.php?V=LATEST");
+
+$REQUEST_PATH = explode("?", str_replace($CONFIG["PAGE"]["PATH"], "/", $_SERVER["REQUEST_URI"]))[0];
+
+//SQL接続
+try{
+	$PDO = new PDO(
+		"mysql:host=".$CONFIG["SQL"]["HOST"].";dbname=".$CONFIG["SQL"]["DB"].";",
+		$CONFIG["SQL"]["USER"],
+		$CONFIG["SQL"]["PASS"],
+		//レコード列名をキーとして取得させる
+		[PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
+	);
+}catch (PDOException $e){
+	echo "データベースにアクセスできません！";
+	exit;
+}
+
+//ログイン
+$LOGIN_OK = false;
+if (isset($_COOKIE["SESSION"])) {
+	$SessionData = json_decode($_COOKIE["SESSION"], true);
+
+	if ($SessionData["TYPE"] == "RSV") {
+		$Login = RSVLogin($SessionData["TOKEN"]);
+		if ($Login != null) {
+			$LOGIN_OK = true;
+			$ACCOUNT = $Login;
+		}
+	}
+}
+?>
+<!DOCTYPE html>
+<HTML>
+	<HEAD>
+		<TITLE>るみWIKi</TITLE>
+
+		<LINK REL="stylesheet" HREF="https://cdn.rumia.me/CSS/reset.css">
+		<LINK REL="stylesheet" HREF="https://cdn.rumia.me/CSS/DEFAULT.css">
+		<LINK REL="stylesheet" HREF="https://cdn.rumia.me/CSS/font.css">
+
+		<LINK REL="stylesheet" HREF="/STYLE/Main.css">
+	</HEAD>
+	<BODY>
+		<DIV CLASS="HEADER">
+			<H1 CLASS="TITLE"><A HREF="/"><?=$CONFIG["PAGE"]["NAME"]?></A></H1>
+
+			<?php
+			if ($LOGIN_OK) {
+				//ログイン済み
+				?><?=htmlspecialchars($ACCOUNT["NAME"])?><?php
+			} else {
+				//ログインしてない
+				?> <A HREF="/login">ログイン</A> <?php
+			}
+			?>
+		</DIV>
+		<DIV CLASS="CONTENTS">
+			<?php
+			if ($REQUEST_PATH == "/") {
+				require(__DIR__."/Page/home.php");
+			} else {
+				if ($REQUEST_PATH == "/create") {
+					require(__DIR__."/Page/Create.php");
+				} elseif ($REQUEST_PATH == "/login") {
+					require(__DIR__."/Page/Login/login.php");
+				} elseif ($REQUEST_PATH == "/login_done") {
+					require(__DIR__."/Page/Login/RSWLogin.php");
+				}
+			}
+			?>
+		</DIV>
+	</BODY>
+</HTML>
