@@ -39,4 +39,26 @@ if ($PAGE != null) {
 <DIV><?=$PAGE_DATE->format("Y年m月d日 A h時i分s秒")?></DIV>
 <HR>
 
-<?=RMD_CONV($PAGE_TEXT)?>
+<?php
+	$Text = $PAGE_TEXT;
+	$Text = RMD_CONV($Text);
+
+	//アラート
+	preg_match_all("/(?i)ALERT\((.*),(?:|\s)({.*})\);/", $Text, $AlertMatch, PREG_SET_ORDER);
+	foreach ($AlertMatch as $MTC) {
+		if (isset($AlertTable[$MTC[1]])) {
+			$AlertParam = json_decode($MTC[2], true);
+			$AlertText = $AlertTable[$MTC[1]];
+
+			foreach (array_keys($AlertParam) as $K) {
+				$AlertText = str_replace($K, htmlspecialchars($AlertParam[$K]), $AlertText);
+			}
+
+			$Text = str_replace($MTC[0], "<DIV CLASS=\"ALERT ALERT_".htmlspecialchars($MTC[1])."\">".$AlertText."</DIV>", $Text);
+		} else {
+			$Text = str_replace($MTC[0], "<FONT COLOR=\"RED\">構文エラー：ID「".htmlspecialchars($MTC[1])."」というアラートはありません。</FONT>", $Text);
+		}
+	}
+
+	echo $Text;
+?>

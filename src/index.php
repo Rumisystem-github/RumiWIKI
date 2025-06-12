@@ -5,6 +5,7 @@ ini_set('error_reporting', E_ALL);
 require(__DIR__."/Config.php");
 require(__DIR__."/Module/AdminManager.php");
 require(__DIR__."/Module/AccountManager.php");
+require(__DIR__."/Module/AlertManager.php");
 require(__DIR__."/Module/GetPage.php");
 require(__DIR__."/Module/CFT.php");
 
@@ -48,6 +49,8 @@ if ($REQUEST_PATH == "/edit_done") {
 	require(__DIR__."/Page/Edit/Done.php");
 	exit;
 }
+
+$AlertTable = GetAlert();
 ?>
 <!DOCTYPE html>
 <HTML>
@@ -59,6 +62,7 @@ if ($REQUEST_PATH == "/edit_done") {
 		<LINK REL="stylesheet" HREF="https://cdn.rumia.me/CSS/font.css">
 
 		<LINK REL="stylesheet" HREF="/STYLE/Main.css">
+		<LINK REL="stylesheet" HREF="/STYLE/Page.css">
 		<LINK REL="stylesheet" HREF="/STYLE/Editor.css">
 	</HEAD>
 	<BODY>

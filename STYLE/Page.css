@@ -1,0 +1,10 @@
+.ALERT{
+	border: solid 1px;
+	background-color: rgb(177, 177, 177);
+
+	width: fit-content;
+
+	padding: 10px;
+
+	margin: auto;
+}
