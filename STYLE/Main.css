@@ -2,6 +2,10 @@
 	--HEADER_HEIGHT: 52px;
 }
 
+body{
+	background-color: rgb(107, 209, 184);
+}
+
 .HEADER{
 	position: fixed;
 	top: 0px;
@@ -23,7 +27,12 @@
 }
 
 .CONTENTS{
+	margin: 10px;
 	margin-top: var(--HEADER_HEIGHT);
 
-	padding: 10px;
+	padding: 5px;
+
+	min-height: calc(100vh - var(--HEADER_HEIGHT) - 10px);
+
+	background-color: whitesmoke;
 }
