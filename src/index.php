@@ -3,6 +3,7 @@ ini_set('display_errors', 1);
 ini_set('error_reporting', E_ALL);
 
 require(__DIR__."/Config.php");
+require(__DIR__."/Module/AdminManager.php");
 require(__DIR__."/Module/AccountManager.php");
 require(__DIR__."/Module/GetPage.php");
 require(__DIR__."/Module/CFT.php");
