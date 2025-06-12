@@ -83,6 +83,8 @@ if ($REQUEST_PATH == "/edit_done") {
 				require(__DIR__."/Page/home.php");
 			} elseif (str_starts_with($REQUEST_PATH, "/page/")) {
 				require(__DIR__."/Page/page.php");
+			} elseif (str_starts_with($REQUEST_PATH, "/history/")) {
+				require(__DIR__."/Page/history.php");
 			} else {
 				if ($LOGIN_OK) {
 					if ($REQUEST_PATH == "/create") {

@@ -24,6 +24,7 @@ if ($PAGE != null) {
 <DIV>
 	<H1 STYLE="display: inline;"><?=htmlspecialchars($PAGE_TITLE)?></H1>
 
+	<!--編集ボタン-->
 	<?php
 	if (!$PAGE_LOCK) {
 		?>
@@ -31,6 +32,9 @@ if ($PAGE != null) {
 		<?php
 	}
 	?>
+
+	<!--履歴-->
+	<A HREF="/history/<?=$PAGE_ID?>">履歴</A>
 </DIV>
 <DIV><?=$PAGE_DATE->format("Y年m月d日 A h時i分s秒")?></DIV>
 <HR>
