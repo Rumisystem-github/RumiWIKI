@@ -8,6 +8,7 @@ require(__DIR__."/Module/AccountManager.php");
 require("https://cdn.rumia.me/LIB/SQL.php?V=LATEST");
 require("https://cdn.rumia.me/LIB/RMD.php?V=LATEST");
 require("http://cdn.rumia.me/LIB/OGP.php?V=LATEST");
+include("http://cdn.rumia.me/LIB/SnowFlake.php?V=LATEST");
 
 $REQUEST_PATH = explode("?", str_replace($CONFIG["PAGE"]["PATH"], "/", $_SERVER["REQUEST_URI"]))[0];
 
@@ -57,7 +58,10 @@ if (isset($_COOKIE["SESSION"])) {
 			<?php
 			if ($LOGIN_OK) {
 				//ログイン済み
-				?><?=htmlspecialchars($ACCOUNT["NAME"])?><?php
+				?>
+					<?=htmlspecialchars($ACCOUNT["NAME"])?>
+					<A HREF="/create">寄稿する</A>
+				<?php
 			} else {
 				//ログインしてない
 				?> <A HREF="/login">ログイン</A> <?php
@@ -68,13 +72,24 @@ if (isset($_COOKIE["SESSION"])) {
 			<?php
 			if ($REQUEST_PATH == "/") {
 				require(__DIR__."/Page/home.php");
+			} elseif (str_starts_with($REQUEST_PATH, "/page/")) {
+				require(__DIR__."/Page/page.php");
 			} else {
-				if ($REQUEST_PATH == "/create") {
-					require(__DIR__."/Page/Create.php");
-				} elseif ($REQUEST_PATH == "/login") {
-					require(__DIR__."/Page/Login/login.php");
-				} elseif ($REQUEST_PATH == "/login_done") {
-					require(__DIR__."/Page/Login/RSWLogin.php");
+				if ($LOGIN_OK) {
+					if ($REQUEST_PATH == "/create") {
+						require(__DIR__."/Page/Create/Create.php");
+					} elseif ($REQUEST_PATH == "/create_done") {
+						require(__DIR__."/Page/Create/Done.php");
+					} elseif (str_starts_with($REQUEST_PATH, "/edit/")) {
+						require(__DIR__."/Page/Edit/editor.php");
+					}
+				} else {
+					//ログインしてない場合用
+					if ($REQUEST_PATH == "/login") {
+						require(__DIR__."/Page/Login/login.php");
+					} elseif ($REQUEST_PATH == "/login_done") {
+						require(__DIR__."/Page/Login/RSWLogin.php");
+					}
 				}
 			}
 			?>

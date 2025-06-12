@@ -17,6 +17,10 @@
 .HEADER > .TITLE{
 	display: inline;
 }
+.HEADER > .TITLE > a{
+	text-decoration: none;
+	color: black;
+}
 
 .CONTENTS{
 	margin-top: var(--HEADER_HEIGHT);

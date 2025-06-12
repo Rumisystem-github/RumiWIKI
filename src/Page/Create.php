@@ -1,3 +1,0 @@
-<FORM>
-	<INPUT TYPE="TEXT" NAME="TITLE" PLACEHOLDER="ページタイトル">
-</FORM>
