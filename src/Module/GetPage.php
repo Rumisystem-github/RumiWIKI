@@ -27,6 +27,8 @@ function GetPage($TITLE, $ID) {
 				`D`.`TITLE` = :TITLE
 			OR
 				`D`.`PAGE` = :ID
+			ORDER
+				BY `D`.`DATE` DESC
 			LIMIT 1;
 		TEXT,
 		array(

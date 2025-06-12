@@ -5,6 +5,7 @@ ini_set('error_reporting', E_ALL);
 require(__DIR__."/Config.php");
 require(__DIR__."/Module/AccountManager.php");
 require(__DIR__."/Module/GetPage.php");
+require(__DIR__."/Module/CFT.php");
 
 require("https://cdn.rumia.me/LIB/SQL.php?V=LATEST");
 require("https://cdn.rumia.me/LIB/RMD.php?V=LATEST");
@@ -39,6 +40,12 @@ if (isset($_COOKIE["SESSION"])) {
 			$ACCOUNT = $Login;
 		}
 	}
+}
+
+//HTMLがとびだせどうぶつの森するとまずいやつをここに
+if ($REQUEST_PATH == "/edit_done") {
+	require(__DIR__."/Page/Edit/Done.php");
+	exit;
 }
 ?>
 <!DOCTYPE html>
