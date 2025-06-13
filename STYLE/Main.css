@@ -1,12 +1,14 @@
 :root{
 	--HEADER_HEIGHT: 52px;
+
+	--MARGIN: 10px
 }
 
 body{
 	background-color: rgb(107, 209, 184);
 }
 
-.HEADER{
+body > .HEADER{
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -18,21 +20,21 @@ body{
 	backdrop-filter: blur(1px);
 }
 
-.HEADER > .TITLE{
+body > .HEADER > .TITLE{
 	display: inline;
 }
-.HEADER > .TITLE > a{
+body > .HEADER > .TITLE > a{
 	text-decoration: none;
 	color: black;
 }
 
-.CONTENTS{
-	margin: 10px;
+body > .CONTENTS{
+	margin: var(--MARGIN);
 	margin-top: var(--HEADER_HEIGHT);
 
-	padding: 5px;
+	padding: calc(var(--MARGIN) / 2);
 
-	min-height: calc(100vh - var(--HEADER_HEIGHT) - 10px);
+	min-height: calc(100vh - var(--HEADER_HEIGHT) - var(--MARGIN));
 
 	background-color: whitesmoke;
 }

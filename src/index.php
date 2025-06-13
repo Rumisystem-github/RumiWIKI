@@ -6,6 +6,7 @@ require(__DIR__."/Config.php");
 require(__DIR__."/Module/AdminManager.php");
 require(__DIR__."/Module/AccountManager.php");
 require(__DIR__."/Module/AlertManager.php");
+require(__DIR__."/Module/TemplateManager.php");
 require(__DIR__."/Module/GetPage.php");
 require(__DIR__."/Module/CFT.php");
 
@@ -51,6 +52,7 @@ if ($REQUEST_PATH == "/edit_done") {
 }
 
 $AlertTable = GetAlert();
+$TemplateTable = GetTemplate();
 ?>
 <!DOCTYPE html>
 <HTML>

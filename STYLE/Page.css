@@ -4,7 +4,33 @@
 
 	width: fit-content;
 
-	padding: 10px;
+	padding: var(--MARGIN);
 
 	margin: auto;
+}
+
+.TEMPLATE{
+	float: right;
+
+	width: 200px;
+
+	margin-right: calc(var(--MARGIN) * 2);
+	margin-bottom: calc(var(--MARGIN) * 2);
+
+	background-color: rgb(221, 221, 221);
+}
+
+.TEMPLATE > .TITLE{
+	background-color: rgb(194, 194, 194);
+
+	text-align: center;
+}
+
+.TEMPLATE > .CONTENTS{
+	padding: var(--MARGIN);
+}
+
+.TEMPLATE > .CONTENTS > a > img{
+	width: 100%;
+	height: auto;
 }
