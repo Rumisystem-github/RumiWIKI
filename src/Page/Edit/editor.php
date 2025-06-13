@@ -93,7 +93,7 @@
 			//保存を削除
 			localStorage.removeItem(SaveKey);
 
-			window.location.href = "/page/<?=$PAGE["TITLE"]?>";
+			window.location.href = "/page/<?=htmlspecialchars($PAGE["TITLE"])?>";
 		} else {
 			alert("失敗した！");
 		}
