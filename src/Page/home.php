@@ -27,7 +27,7 @@ $GetLatestPageSQL = SQL_RUN($PDO,
 
 if ($GetLatestPageSQL["STATUS"]) {
 	foreach ($GetLatestPageSQL["RESULT"] as $Row) {
-		echo "<A HREF=\"/page/".htmlspecialchars($Row["TITLE"])."\">".htmlspecialchars($Row["TITLE"])."</A><BR>";
+		echo "<A HREF=\"/page/".urlencode($Row["TITLE"])."\">".htmlspecialchars($Row["TITLE"])."</A><BR>";
 	}
 }
 ?>
