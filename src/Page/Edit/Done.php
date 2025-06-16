@@ -12,8 +12,10 @@ if (!CFTCheck($_POST["CFT"])) {
 	exit;
 }
 $ID = $_POST["ID"];
+$DataID = GenSnowFlake();
 $TEXT = $_POST["TEXT"];
 $PAGE = GetPageFromID($ID);
+$SOURCE = json_decode($_POST["SOURCE"], true);
 
 //記事有る？
 if ($PAGE == null) {
@@ -30,7 +32,7 @@ SQL_RUN($PDO, "INSERT INTO `PAGE_DATA` (`ID`, `PAGE`, `DATE`, `UID`, `TITLE`, `T
 	array(
 		array(
 			"KEY" => "ID",
-			"VAL" => GenSnowFlake()
+			"VAL" => $DataID
 		),
 		array(
 			"KEY" => "PAGE",
@@ -54,5 +56,22 @@ SQL_RUN($PDO, "INSERT INTO `PAGE_DATA` (`ID`, `PAGE`, `DATE`, `UID`, `TITLE`, `T
 		)
 	)
 );
+
+foreach (array_keys($SOURCE) as $Index) {
+	SQL_RUN($PDO, "INSERT INTO `PAGE_SOURCE` (`ID`, `DATA`, `URL`, `COMMENT`) VALUES (:ID, :DATA, :URL, '');", [
+		[
+			"KEY" => "ID",
+			"VAL" => GenSnowFlake()
+		],
+		[
+			"KEY" => "DATA",
+			"VAL" => $DataID
+		],
+		[
+			"KEY" => "URL",
+			"VAL" => $SOURCE[$Index]
+		]
+	]);
+}
 
 echo json_encode(["STATUS"=>true]);

@@ -14,6 +14,7 @@ function GetPage($TITLE, $ID) {
 		<<<TEXT
 			SELECT
 				`D`.`PAGE` AS `ID`,
+				`D`.`ID` AS `DATA_ID`,
 				`D`.`TITLE`,
 				`D`.`DATE`,
 				`D`.`TITLE`,
