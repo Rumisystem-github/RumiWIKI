@@ -83,6 +83,9 @@ if ($PAGE != null) {
 		}
 	}
 
+	//Wikiリンク
+	$Text = preg_replace('/HREF="wiki:\/\/([^"]+)"/iu', 'HREF="/page/$1"', $Text);
+
 	//出典元
 	preg_match_all("/\[(\d+)\]/", $Text, $SourceMatch, PREG_SET_ORDER);
 	foreach ($SourceMatch as $MTC) {
@@ -95,7 +98,7 @@ if ($PAGE != null) {
 <HR>
 出典元<BR>
 <?php
-$SQL_RESULT = SQL_RUN($PDO, "SELECT * FROM `PAGE_SOURCE` WHERE `DATA` = :DATA;", [
+$SQL_RESULT = SQL_RUN($PDO, "SELECT * FROM `PAGE_SOURCE` WHERE `DATA` = :DATA ORDER BY `INDEX` ASC;", [
 	[
 		"KEY" => "DATA",
 		"VAL" => $DATA_ID

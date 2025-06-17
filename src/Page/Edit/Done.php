@@ -58,10 +58,14 @@ SQL_RUN($PDO, "INSERT INTO `PAGE_DATA` (`ID`, `PAGE`, `DATE`, `UID`, `TITLE`, `T
 );
 
 foreach (array_keys($SOURCE) as $Index) {
-	SQL_RUN($PDO, "INSERT INTO `PAGE_SOURCE` (`ID`, `DATA`, `URL`, `COMMENT`) VALUES (:ID, :DATA, :URL, '');", [
+	SQL_RUN($PDO, "INSERT INTO `PAGE_SOURCE` (`ID`, `INDEX`, `DATA`, `URL`, `COMMENT`) VALUES (:ID, :INDEX, :DATA, :URL, '');", [
 		[
 			"KEY" => "ID",
 			"VAL" => GenSnowFlake()
+		],
+		[
+			"KEY" => "INDEX",
+			"VAL" => $Index
 		],
 		[
 			"KEY" => "DATA",
