@@ -34,3 +34,14 @@
 	width: 100%;
 	height: auto;
 }
+
+.SOURCE_LINK{
+	vertical-align: top;
+	font-size: 12px;
+
+	text-decoration: none;
+}
+
+.SOURCE:target{
+	background-color: aqua;
+}

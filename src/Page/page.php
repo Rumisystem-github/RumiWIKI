@@ -89,7 +89,7 @@ if ($PAGE != null) {
 	//出典元
 	preg_match_all("/\[(\d+)\]/", $Text, $SourceMatch, PREG_SET_ORDER);
 	foreach ($SourceMatch as $MTC) {
-		$Text = str_replace(htmlspecialchars($MTC[0]), "<A HREF=\"#SOURCE-".$MTC[1]."\">[".$MTC[1]."]</A>", $Text);
+		$Text = str_replace(htmlspecialchars($MTC[0]), "<A CLASS=\"SOURCE_LINK\" HREF=\"#SOURCE-".$MTC[1]."\">[".$MTC[1]."]</A>", $Text);
 	}
 
 	echo $Text;
@@ -106,7 +106,7 @@ $SQL_RESULT = SQL_RUN($PDO, "SELECT * FROM `PAGE_SOURCE` WHERE `DATA` = :DATA OR
 ]);
 if ($SQL_RESULT["STATUS"]) {
 	for ($I=0; $I < count($SQL_RESULT["RESULT"]); $I++) {
-		echo "<DIV ID=\"SOURCE-".($I+1)."\">";
+		echo "<DIV CLASS=\"SOURCE\" ID=\"SOURCE-".($I+1)."\">";
 		echo "[".($I+1)."]:";
 		echo "<A HREF=\"".htmlspecialchars($SQL_RESULT["RESULT"][$I]["URL"])."\">".htmlspecialchars($SQL_RESULT["RESULT"][$I]["URL"])."</A>";
 		echo "</DIV>";
