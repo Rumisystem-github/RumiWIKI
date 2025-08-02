@@ -10,10 +10,11 @@ require(__DIR__."/Module/TemplateManager.php");
 require(__DIR__."/Module/GetPage.php");
 require(__DIR__."/Module/CFT.php");
 
+//↓自分が所有しているCDNなので、httpで繋がない限り心配はない
 require("https://cdn.rumia.me/LIB/SQL.php?V=LATEST");
 require("https://cdn.rumia.me/LIB/RMD.php?V=LATEST");
-require("http://cdn.rumia.me/LIB/OGP.php?V=LATEST");
-include("http://cdn.rumia.me/LIB/SnowFlake.php?V=LATEST");
+require("https://cdn.rumia.me/LIB/OGP.php?V=LATEST");
+include("https://cdn.rumia.me/LIB/SnowFlake.php?V=LATEST");
 
 $REQUEST_PATH = explode("?", str_replace($CONFIG["PAGE"]["PATH"], "/", $_SERVER["REQUEST_URI"]))[0];
 
