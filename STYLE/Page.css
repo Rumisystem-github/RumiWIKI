@@ -11,9 +11,11 @@
 
 .TEMPLATE{
 	float: right;
+	clear: right;
 
 	width: 200px;
 
+	margin-left: calc(var(--MARGIN) * 2);
 	margin-right: calc(var(--MARGIN) * 2);
 	margin-bottom: calc(var(--MARGIN) * 2);
 
