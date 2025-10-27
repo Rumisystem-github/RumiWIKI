@@ -12,6 +12,7 @@
 			<TH></TH>
 			<TH>番号</TH>
 			<TH>URL</TH>
+			<TH>アーカイブURL</TH>
 		</TR>
 		<?php
 		$SQL_RESULT = SQL_RUN($PDO, "SELECT * FROM `PAGE_SOURCE` WHERE `DATA` = :DATA;", [
@@ -27,6 +28,13 @@
 					<TD><BUTTON onclick="this.parentElement.parentElement.remove();">X</BUTTON></TD>
 					<TD data-type="INDEX"><?=$I+1?></TD>
 					<TD data-type="URL"><?=$SQL_RESULT["RESULT"][$I]["URL"]?></TD>
+					<?php
+					if (isset($SQL_RESULT["RESULT"][$I]["ARFCHIVE_URL"])) {
+						?> <TD data-type="ARCHIVE_URL"><?=$SQL_RESULT["RESULT"][$I]["ARFCHIVE_URL"]?></TD> <?php
+					} else {
+						?> <TD data-type="ARCHIVE_URL"></TD> <?php
+					}
+					?>
 				</TR>
 				<?php
 			}
