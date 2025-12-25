@@ -1,0 +1,31 @@
+:root{
+	--header_height: 50px;
+}
+
+.HEADER{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+
+	width: 100vw;
+	height: var(--header_height);
+
+	z-index: 10;
+
+	background-color: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(1px);
+}
+
+.HEADER > a{
+	color: black;
+	text-decoration: none;
+}
+
+.CONTENTS{
+	margin: 10px;
+
+	width: calc(100vw - 30px);
+	height: fit-content;
+
+	padding-top: calc(var(--header_height) + 10px);
+}

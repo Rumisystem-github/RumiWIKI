@@ -1,0 +1,63 @@
+:root{
+	--toc_width: 200px;
+}
+
+.WIKI_PAGE{
+	position: relative;
+
+	width: 100%;
+}
+
+.WIKI_PAGE > .TOC{
+	position: fixed;
+	top: calc(var(--header_height) + 10px);
+	left: 10px;
+
+	width: var(--toc_width);
+}
+
+.WIKI_PAGE > .PAGE_CONTENTS{
+	position: absolute;
+	top: 0px;
+	left: var(--toc_width);
+
+	width: calc(100% - var(--toc_width));
+}
+
+.WIKI_PAGE > .PAGE_CONTENTS > .TEXT{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.WIKI_PAGE > .PAGE_CONTENTS > .TEXT > h1{
+	border-bottom: solid 1px;
+}
+
+.ALERT{
+	margin: auto;
+
+	background-color: rgb(201, 201, 201);
+	border: solid 1px;
+
+	width: 50vw;
+
+	padding: 10px;
+}
+
+.TEMPLATE{
+	float: right;
+	clear: right;
+
+	background-color: rgb(201, 201, 201);
+	border: solid 1px;
+
+	width: 200px;
+	height: fit-content;
+
+	padding: 10px;
+}
+
+.TEMPLATE > .TEMPLATE_TITLE{
+	text-align: center;
+	border-bottom: solid 1px;
+}
