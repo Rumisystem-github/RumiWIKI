@@ -3,25 +3,22 @@
 }
 
 .WIKI_PAGE{
-	position: relative;
+	display: flex;
+	flex-direction: row;
 
 	width: 100%;
 }
 
 .WIKI_PAGE > .TOC{
-	position: fixed;
-	top: calc(var(--header_height) + 10px);
-	left: 10px;
-
 	width: var(--toc_width);
+
+	position: sticky;
+	top: 0px;
+	align-self: flex-start;
 }
 
 .WIKI_PAGE > .PAGE_CONTENTS{
-	position: absolute;
-	top: 0px;
-	left: var(--toc_width);
-
-	width: calc(100% - var(--toc_width));
+	width: 100%;
 }
 
 .WIKI_PAGE > .PAGE_CONTENTS > .TEXT{

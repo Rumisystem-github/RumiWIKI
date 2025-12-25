@@ -50,10 +50,26 @@ ob_end_clean();
 	<HEAD>
 		<TITLE><?=htmlspecialchars($config["SITE"]["TITLE"])?> | <?=htmlspecialchars($ogp["TITLE"])?></TITLE>
 
+		<META name="theme-color" content="<?=$config["THEME"]["COLOR"]?>" />
+		<META name="viewport" content="width=device-width, initial-scale=1" />
+
 		<LINK REL="stylesheet" HREF="https://cdn.rumia.me/CSS/font.css">
 		<LINK REL="stylesheet" HREF="https://cdn.rumia.me/CSS/reset.css">
 		<LINK REL="stylesheet" HREF="https://cdn.rumia.me/CSS/DEFAULT.css">
 		<LINK REL="stylesheet" HREF="https://cdn.rumia.me/CSS/icon.css">
+
+		<STYLE>
+			:root{
+				--color: <?=$config["THEME"]["COLOR"]?>;
+			}
+
+			body{
+				background-image: url("<?=$config["THEME"]["BG"]?>");
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+			}
+		</STYLE>
 
 		<LINK REL="stylesheet" HREF="<?=htmlspecialchars($config["SITE"]["URL"])?>/Style/Main.css">
 		<LINK REL="stylesheet" HREF="<?=htmlspecialchars($config["SITE"]["URL"])?>/Style/View.css">
@@ -70,7 +86,7 @@ ob_end_clean();
 	</HEAD>
 	<BODY>
 		<?php require(__DIR__."/Component/Header.php"); ?>
-		<DIV CLASS="CONTENTS">
+		<DIV CLASS="CONTENTS PLATE_BG">
 			<?=$contents?>
 		</DIV>
 	</BODY>
