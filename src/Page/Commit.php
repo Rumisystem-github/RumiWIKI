@@ -4,8 +4,6 @@ if ($login == false) {
 	return;
 }
 
-require(__DIR__."/../Tool/CFTCheck.php");
-
 header("Content-Type: application/json; charset=UTF-8");
 $post = json_decode(file_get_contents("php://input"), true);
 

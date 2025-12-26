@@ -8,3 +8,5 @@
 <H1>おすすめ記事</H1>
 <A HREF="wiki/るみ">るみ</A><BR>
 <A HREF="wiki/るみみすきー">るみみすきー</A><BR>
+<A HREF="wiki/るみ共和国連邦">るみ共和国連邦</A><BR>
+<A HREF="wiki/るみ語">るみ語</A><BR>

@@ -15,6 +15,7 @@ require("https://cdn.rumia.me/LIB/RMDParser.php?V=LATEST");
 
 //にゃ
 require(__DIR__."/Tool/SessionLogin.php");
+require(__DIR__."/Tool/CFTCheck.php");
 
 try {
 	$sql = new PDO(
@@ -53,6 +54,8 @@ if ($path == "/") {
 	$include_path = "/Edit.php";
 } else if ($path == "/commit") {
 	$include_path = "/Commit.php";
+} else if ($path == "/create") {
+	$include_path = "/Create.php";
 }
 
 $ogp = [
