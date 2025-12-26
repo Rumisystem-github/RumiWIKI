@@ -105,6 +105,7 @@ $source_list = $stmt->fetchAll();
 </DIV>
 
 <SCRIPT defer>
+	const dialog = new DIALOG_SYSTEM();
 	let mel = {
 		source_list: document.getElementById("SOURCE_LIST").querySelector("TBODY"),
 		editor: {
@@ -181,6 +182,10 @@ $source_list = $stmt->fetchAll();
 			})
 		});
 		const result = await ajax.json();
-		console.log(result);
+		if (result.STATUS) {
+			window.location.href = "/wiki/<?=$page["TITLE"]?>";
+		} else {
+			dialog.DIALOG("編集エラー");
+		}
 	}
 </SCRIPT>
