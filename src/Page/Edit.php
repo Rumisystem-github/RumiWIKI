@@ -79,6 +79,7 @@ $source_list = $stmt->fetchAll();
 	<DIV CLASS="SOURCE_LIST">
 		<BUTTON onclick="add_source();">+</BUTTON>
 		<TABLE ID="SOURCE_LIST">
+			<TBODY></TBODY>
 			<?php
 			foreach ($source_list as $source) {
 				?>
@@ -91,6 +92,7 @@ $source_list = $stmt->fetchAll();
 				<?php
 			}
 			?>
+			</TBODY>
 		</TABLE>
 	</DIV>
 
