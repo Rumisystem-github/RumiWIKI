@@ -101,11 +101,14 @@ $source_list = $stmt->fetchAll();
 
 <DIV CLASS="COMMIT_FORM" ID="COMMIT_FORM" STYLE="display: none;">
 	<TEXTAREA ID="COMMIT_FORM_MESSAGE" PLACEHOLDER="コミットメッセージ"></TEXTAREA>
+	<DIV class="cf-turnstile" data-sitekey="<?=$config["CFT"]["SITE_KEY"]?>" data-callback="CFT_OK" data-language="ja"></DIV>
 	<BUTTON onclick="commit();">コミット</BUTTON>
 </DIV>
 
+<SCRIPT SRC="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></SCRIPT>
 <SCRIPT defer>
 	const dialog = new DIALOG_SYSTEM();
+	let cft_result = null;
 	let mel = {
 		source_list: document.getElementById("SOURCE_LIST").querySelector("TBODY"),
 		editor: {
@@ -115,6 +118,10 @@ $source_list = $stmt->fetchAll();
 			parent: document.getElementById("COMMIT_FORM"),
 			message: document.getElementById("COMMIT_FORM_MESSAGE")
 		}
+	};
+
+	window.CFT_OK = function(r) {
+		cft_result = r;
 	};
 
 	function add_source() {
@@ -178,7 +185,8 @@ $source_list = $stmt->fetchAll();
 			body: JSON.stringify({
 				"COMMIT":commit_data,
 				"PAGE": page_data,
-				"SOURCE":source_list
+				"SOURCE":source_list,
+				"CFT": cft_result
 			})
 		});
 		const result = await ajax.json();

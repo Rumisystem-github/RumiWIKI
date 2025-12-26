@@ -56,7 +56,7 @@ if ($path == "/") {
 }
 
 $ogp = [
-	"TITLE" => "あ",
+	"TITLE" => "トップ",
 	"DESCRIPTION" => "ううう"
 ];
 

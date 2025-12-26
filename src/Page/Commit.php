@@ -3,8 +3,16 @@ if ($login == false) {
 	echo json_encode(["STATUS" => false]);
 	return;
 }
+
+require(__DIR__."/../Tool/CFTCheck.php");
+
 header("Content-Type: application/json; charset=UTF-8");
 $post = json_decode(file_get_contents("php://input"), true);
+
+if (!cft_check($post["CFT"])) {
+	echo json_encode(["STATUS" => false]);
+	return;
+}
 
 $commit_message = $post["COMMIT"]["MESSAGE"];
 
