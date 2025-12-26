@@ -10,8 +10,11 @@ if ($config == false) {
 //↓自分が所有しているCDNなので、httpで繋がない限り心配はない
 require("https://cdn.rumia.me/LIB/SQL.php?V=LATEST");
 require("https://cdn.rumia.me/LIB/OGP.php?V=LATEST");
-include("https://cdn.rumia.me/LIB/SnowFlake.php?V=LATEST");
-include("https://cdn.rumia.me/LIB/RMDParser.php?V=LATEST");
+require("https://cdn.rumia.me/LIB/SnowFlake.php?V=LATEST");
+require("https://cdn.rumia.me/LIB/RMDParser.php?V=LATEST");
+
+//にゃ
+require(__DIR__."/Tool/SessionLogin.php");
 
 try {
 	$sql = new PDO(
@@ -31,8 +34,25 @@ $include_path = "/Error/404.html";
 
 if ($path == "/") {
 	$include_path = "/Top.php";
-} else if (str_starts_with($path, "/page/")) {
+} else if (str_starts_with($path, "/wiki/")) {
 	$include_path = "/View.php";
+} else if ($path == "/login") {
+	header("Location: https://account.rumiserver.com/Auth?".
+		"ID=".$CONFIG["DEPENDENCY"]["ACCOUNT_RSW_ID"].
+		"&SESSION=".urlencode(uniqid()).
+		"&PERMISSION=account:read&CALLBACK=".
+		urlencode($CONFIG["PAGE"]["URL"]."/login_done")
+	);
+	exit;
+} else if ($path == "/login_done") {
+	require(__DIR__."/Tool/RSVAuth.php");
+	exit;
+} else if ($path == "/istoria") {
+	$include_path = "/Istoria.php";
+} else if ($path == "/edit") {
+	$include_path = "/Edit.php";
+} else if ($path == "/commit") {
+	$include_path = "/Commit.php";
 }
 
 $ogp = [
@@ -83,6 +103,8 @@ ob_end_clean();
 		<META name="twitter:card" content="summary_large_image" />
 
 		<META name="description" content="<?=htmlspecialchars($ogp["DESCRIPTION"])?>">
+
+		<SCRIPT SRC="https://cdn.rumia.me/LIB/DIALOG.js"></SCRIPT>
 	</HEAD>
 	<BODY>
 		<?php require(__DIR__."/Component/Header.php"); ?>

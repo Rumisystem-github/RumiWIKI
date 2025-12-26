@@ -1,21 +1,38 @@
 <?php
-//ページのタイトルからデータを取得
-$page_title = urldecode(str_replace("/page/", "", $path));
-$stmt = $sql->prepare("
-	SELECT
-		d.*
-	FROM
-		`PAGE_DATA` AS d
-	WHERE
-		d.TITLE = :TITLE
-	ORDER BY
-		d.DATE DESC
-	LIMIT
-		1;
-");
-$stmt->bindValue(":TITLE", $page_title, PDO::PARAM_STR);
-$stmt->execute();
-$page = $stmt->fetch();
+$page = null;
+
+if (isset($_GET["DATA"])) {
+	//ページデータのIDから取得
+	$stmt = $sql->prepare("
+		SELECT
+			d.*
+		FROM
+			`PAGE_DATA` AS d
+		WHERE
+			d.ID = :ID;
+	");
+	$stmt->bindValue(":ID", $_GET["DATA"], PDO::PARAM_STR);
+	$stmt->execute();
+	$page = $stmt->fetch();
+} else {
+	//ページのタイトルからデータを取得
+	$page_title = urldecode(str_replace("/wiki/", "", $path));
+	$stmt = $sql->prepare("
+		SELECT
+			d.*
+		FROM
+			`PAGE_DATA` AS d
+		WHERE
+			d.TITLE = :TITLE
+		ORDER BY
+			d.DATE DESC
+		LIMIT
+			1;
+	");
+	$stmt->bindValue(":TITLE", $page_title, PDO::PARAM_STR);
+	$stmt->execute();
+	$page = $stmt->fetch();
+}
 
 //データから出典を取得
 $stmt = $sql->prepare("SELECT * FROM `PAGE_SOURCE` WHERE `DATA` = :DATA ORDER BY `INDEX` ASC;");
@@ -173,7 +190,19 @@ foreach ($template_match as $m) {
 	</DIV>
 	<DIV CLASS="PAGE_CONTENTS">
 		<H1><?=htmlspecialchars($page["TITLE"])?></H1>
+		<A HREF="/edit?ID=<?=$page["PAGE"]?>">編集</A>
+		<A HREF="/istoria?ID=<?=$page["PAGE"]?>">履歴</A>
 		<HR>
+
+		<?php
+		if (isset($_GET["DATA"])) {
+			?>
+			<DIV CLASS="ALERT">
+				現在古い記事を表示しています。
+			</DIV>
+			<?php
+		}
+		?>
 
 		<DIV CLASS="TEXT">
 			<?=$html?>
